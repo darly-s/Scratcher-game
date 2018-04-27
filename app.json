@@ -20,6 +20,9 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "packagerOpts": {
+      "assetExts": ["ttf", "mp4", "otf", "xml", "atlas", "frag", "xml"]
+    },
     "ios": {
       "supportsTablet": true
     }

@@ -7,6 +7,7 @@ import CharacterComponent from './src/app/components/CharacterComponent/Characte
 
 export default class App extends Component {
     render() {
+        alert(window.outerWidth);
         return (
             <View style={styles.container}>
                 <ImageBackground style={styles.imageBackground} source={backgroundImage}>
@@ -20,12 +21,12 @@ export default class App extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: 'red',
         alignItems: 'center',
         justifyContent: 'center',
     },
     imageBackground: {
-        width: '100%',
-        height: '100%'
+        width: '75%',
+        height: '100%',
     }
 });

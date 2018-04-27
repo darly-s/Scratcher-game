@@ -1,11 +1,17 @@
 import React from 'react';
 import { View, ImageBackground, StyleSheet } from 'react-native';
 
+import PixiBaseView from '../Views/PixiBaseView';
+
+import Animations from '../Animations';
+
 import winnerImage from '../../../../assets/images/magic_forest_winner_frame.png';
 
 const characterComponent = () => (
     <View style={styles.characterContainer}>
-        <View style={styles.character}></View>
+        <View style={styles.character}>
+            <PixiBaseView app={Animations.Red.default} />
+        </View>
         <ImageBackground style={styles.winnerContainer}
                          imageStyle={styles.winnerImage}
                          source={winnerImage}></ImageBackground>
