@@ -1,5 +1,9 @@
 import ExpoPixi from 'expo-pixi';
 
+const start = 'red_happy_card_st';
+const loop = 'red_happy_card_loop';
+const end = 'red_happy_card_end';
+
 export default async context => {
     const app = ExpoPixi.application({
         context,
@@ -22,20 +26,14 @@ export default async context => {
 
     red.scale.set((app.renderer.height/red.height) / 2);
 
-    red.stateData.setMix('red_idle_st', 'red_idle_loop', 0.2);
-    red.stateData.setMix('red_idle_loop', 'red_idle_end', 0.4);
-    red.stateData.setMix('red_idle_end', 'red_idle_loop', 0.6);
-    red.stateData.setMix('red_idle_loop', 'red_idle_st', 0.8);
+    red.stateData.setMix(start, loop, 0.2);
+    red.stateData.setMix(loop, end, 0.2);
 
-    red.state.setAnimation(0, 'red_idle_loop', true);
+
+    red.state.setAnimation(0, start, true);
+    red.state.addAnimation(0, loop, true, 0);
+    red.state.addAnimation(0, end, true, 0);
 
     app.stage.addChild(red);
 
-    global.document.addEventListener('touchstart', function() {
-        red.state.setAnimation(0, 'red_idle_end', false);
-        red.state.addAnimation(0, 'red_idle_loop', true, 0);
-        red.state.addAnimation(0, 'red_idle_st', true, 0);
-        red.state.addAnimation(0, 'red_idle_loop', true, 0);
-        red.state.setAnimation(0, 'red_idle_end', true, 0);
-    });
 };

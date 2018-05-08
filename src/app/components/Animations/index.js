@@ -1,3 +1,4 @@
 export default {
-    Red: require(`./Red.js`),
+    Idle: require(`./Idle.js`),
+    Happy: require(`./Happy.js`),
 };

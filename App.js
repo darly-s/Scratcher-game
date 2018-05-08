@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ImageBackground, Dimensions } from 'react-nativ
 
 import backgroundImage from './assets/images/magic_forest_bg.jpg';
 
-import CharacterComponent from './src/app/components/CharacterComponent/CharacterComponent';
+import CharacterComponent from './src/app/components/CharacterComponent';
 
 export default class App extends Component {
     render() {
