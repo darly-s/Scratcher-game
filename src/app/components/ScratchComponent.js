@@ -1,28 +1,34 @@
 import React from 'react';
+import Expo from 'expo';
 import { View, Dimensions, StyleSheet, PixelRatio, TouchableWithoutFeedback } from 'react-native';
-import Canvas from 'react-native-canvas';
+import Animations from './Animations';
+import ScratchView from './Views/ScratchView';
 
-const scratchComponent = (props) => (
-    <TouchableWithoutFeedback>
-        <View onLayout={(event) => console.log(event)}style={styles.containerScratch}>
-            <Canvas ref={handleCanvas}/>
-        </View>
-    </TouchableWithoutFeedback>
+const app = Animations.Card.default;
+
+const scratchComponent = () => (
+    <View style={styles.containerScratch}>
+        <ScratchView style={{ flex: 1 }}>
+            <View style={{ flex: 1 }}>
+                <Expo.GLView
+                    style={{ flex: 1 }}
+                    onContextCreate={async context => {
+                        const events = (await app(context)) || {};
+                    }}
+                />
+            </View>
+        </ScratchView>
+    </View>
 );
 
 const {height} = Dimensions.get('window');
-const ratio = height / 8;
-const handleCanvas = (canvas) => {
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = 'purple';
-    ctx.fillRect(0, 0, ratio, ratio);
-};
+const ratio = height / 6;
 
 const styles = StyleSheet.create({
     containerScratch: {
         width: ratio,
         height: ratio,
-        top: '47%',
+        top: '42%',
         right: '3%',
         alignSelf: 'center',
         borderWidth: 2

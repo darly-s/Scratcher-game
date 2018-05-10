@@ -1,25 +1,27 @@
 import React from 'react';
-import { View, ImageBackground, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import { View, ImageBackground, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
-import PixiBaseView from './Views/PixiBaseView';
 import Animations from './Animations/index';
 import ScratchComponent from './ScratchComponent';
 
 import winnerImage from '../../../assets/images/magic_forest_winner_frame.png';
 
+app = Animations.Idle.default;
+
 const characterComponent = () => (
     <View style={styles.characterContainer}>
         <View style={styles.character}>
-            <PixiBaseView app={Animations.Idle.default}/>
+            <Expo.GLView
+                style={{flex: 1}}
+                onContextCreate={async context => {
+                    const events = (await app(context)) || {};
+                }}
+            />
         </View>
         <ImageBackground style={styles.winnerContainer}
                          imageStyle={styles.winnerImage}
-                         source={winnerImage}
-                         onLayout={(event) => {
-                             imgBgWidth = event.nativeEvent.layout.width;
-                             imgBgHeight = event.nativeEvent.layout.height;
-                         }}>
-            <ScratchComponent imgWidth={imgBgWidth} imgHeight={imgBgHeight}/>
+                         source={winnerImage}>
+            <ScratchComponent/>
         </ImageBackground>
     </View>
 );
@@ -47,8 +49,5 @@ const styles = StyleSheet.create({
         resizeMode: 'contain'
     }
 });
-
-let imgBgWidth;
-let imgBgHeight;
 
 export default characterComponent;
