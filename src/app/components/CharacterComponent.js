@@ -6,18 +6,20 @@ import ScratchComponent from './ScratchComponent';
 
 import winnerImage from '../../../assets/images/magic_forest_winner_frame.png';
 
-app = Animations.Idle.default;
+app = Animations.Red.default;
 
 const characterComponent = () => (
     <View style={styles.characterContainer}>
-        <View style={styles.character}>
-            <Expo.GLView
-                style={{flex: 1}}
-                onContextCreate={async context => {
-                    const events = (await app(context)) || {};
-                }}
-            />
-        </View>
+        <TouchableWithoutFeedback onPress={() => Animations.Red.emit()}>
+            <View style={styles.character}>
+                <Expo.GLView
+                    style={{flex: 1}}
+                    onContextCreate={async context => {
+                        const events = (await app(context)) || {};
+                    }}
+                />
+            </View>
+        </TouchableWithoutFeedback>
         <ImageBackground style={styles.winnerContainer}
                          imageStyle={styles.winnerImage}
                          source={winnerImage}>

@@ -4,19 +4,17 @@ import { View, StyleSheet, ImageBackground, Text } from 'react-native';
 import backgroundText from '../../../assets/images/magic_forest_frame_for_text.png';
 import cardBackground from '../../../assets/images/magic_forest_frame.png';
 
-const cards = new Array(6);
+const cards = [1, 2, 3, 4, 5, 6];
 
 const scratchListComponent = () => (
     <View style={styles.containerScratch}>
         <ImageBackground style={styles.backgroundText} source={backgroundText}>
             <Text style={styles.text}>MATCH THE WINNER AND WIN A PRIZE</Text>
         </ImageBackground>
-        <ImageBackground style={styles.cardBackground} source={cardBackground}></ImageBackground>
-        <ImageBackground style={styles.cardBackground} source={cardBackground}></ImageBackground>
-        <ImageBackground style={styles.cardBackground} source={cardBackground}></ImageBackground>
-        <ImageBackground style={styles.cardBackground} source={cardBackground}></ImageBackground>
-        <ImageBackground style={styles.cardBackground} source={cardBackground}></ImageBackground>
-        <ImageBackground style={styles.cardBackground} source={cardBackground}></ImageBackground>
+        {
+            cards.map(item => <ImageBackground key={item} style={styles.cardBackground}
+                                               source={cardBackground}></ImageBackground>)
+        }
     </View>
 );
 
