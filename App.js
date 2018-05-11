@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
+import { Font } from 'expo';
 import { StyleSheet, Text, View, ImageBackground, Dimensions } from 'react-native';
 
 import backgroundImage from './assets/images/magic_forest_bg.jpg';
 
 import CharacterComponent from './src/app/components/CharacterComponent';
+import ScratchListComponent from './src/app/components/ScratchListComponent';
 
 export default class App extends Component {
+    state = {
+        isFontLoaded: false,
+    };
+
+    async componentDidMount() {
+        await Font.loadAsync({
+            'scratcher-font': require('./assets/fonts/DRAguSans-Black.ttf'),
+        });
+        this.setState({isFontLoaded: true});
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <ImageBackground style={styles.imageBackground} source={backgroundImage}>
                     <CharacterComponent/>
+                    {(this.state.isFontLoaded) ? <ScratchListComponent isFontLoaded={this.state.fontLoaded}/> : null}
                 </ImageBackground>
             </View>
         );
