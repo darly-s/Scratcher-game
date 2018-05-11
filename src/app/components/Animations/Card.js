@@ -22,7 +22,7 @@ export default async (context) => {
     brush.endFill();
 
     const texture1 = await ExpoPixi.textureAsync(require('../../../../assets/images/magic_forest_scratch_frame_big.png'));
-    const texture2 = await ExpoPixi.textureAsync(require('../../../../assets/images/magic_forest_bonfire.png'));
+    const texture2 = await ExpoPixi.textureAsync(require('../../../../assets/images/scratch-image/magic_forest_bonfire.png'));
     PIXI.loader.load(setup);
 
     function setup() {
