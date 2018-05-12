@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ImageBackground, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
 import Animations from './Animations/index';
-import ScratchComponent from './ScratchComponent';
+import BonusComponent from './BonusComponent';
 import SuccessComponent from './SuccessComponent'
 
 import winnerImage from '../../../assets/images/magic_forest_winner_frame.png';
@@ -24,7 +24,7 @@ const characterComponent = () => (
         <ImageBackground style={styles.winnerContainer}
                          imageStyle={styles.winnerImage}
                          source={winnerImage}>
-            <ScratchComponent/>
+            <BonusComponent/>
         </ImageBackground>
     </View>
 );

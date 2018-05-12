@@ -14,7 +14,13 @@ import { chooseCard } from './Services/Cards.service';
 
 import cover from '../../../assets/images/magic_forest_scratch_frame_big.png';
 
-const checkBonus = (status) => (status) ? Animations.Red.happyBonus() : null;
+let isAnimationPlayed = false;
+const checkBonus = (status) => {
+    if (status && !isAnimationPlayed) {
+        Animations.Red.happyBonus();
+        isAnimationPlayed = true;
+    }
+};
 const app = Animations.Card.default;
 const image = chooseCard(Math.round(Math.random() * 4));
 const handlers = {
@@ -26,7 +32,7 @@ const handlers = {
     }
 };
 
-const scratchComponent = () => (
+const bonusComponent = () => (
     <View style={styles.containerScratch}>
         <ScratchView handlers={handlers} style={{flex: 1}}>
             <View style={{flex: 1}}>
@@ -55,4 +61,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default scratchComponent;
+export default bonusComponent;

@@ -12,12 +12,20 @@ import ScratchView from './Views/ScratchView';
 
 const app = Animations.Card.default;
 const statuses = [];
+const globalParams = {isWin: null, winnerCard: null, isWinnerCompared: null};
+
+const checkStatus = () => {
+    const isAllCardsVisible = statuses.filter(el => el).length === 6;
+    if (isAllCardsVisible) {
+        (globalParams.isWin) ? Animations.Red.happyCard() : Animations.Red.disappointed();
+    }
+};
 
 const cardsCombine = () => {
     const isWin = Math.random() >= 0.7;
     const images = [];
     const unTaken = [];
-    const shuffle = (status) => {
+    const shuffle = () => {
         while (images.length < 6) {
             let isSufficient;
             let isUnTaken;
@@ -35,10 +43,12 @@ const cardsCombine = () => {
         shuffle();
     } else {
         const winnerCard = chooseWinner(Math.random());
-        [1,1,1].map(() => images.push(winnerCard));
+        [1, 1, 1].map(() => images.push(winnerCard));
         shuffle();
+        globalParams.winnerCard = winnerCard;
     }
     images.map(item => statuses.push(false));
+    globalParams.isWin = isWin;
     return images;
 };
 
@@ -52,9 +62,12 @@ export default class scratchListComponent extends Component {
                 {
                     cardsCombine().map((image, index) => {
                         const handlers = {
-                            pointerMove: () => {},
-                            pointerDown: () => {},
-                            pointerUp: () => {}
+                            pointerMove: () => {
+                            },
+                            pointerDown: () => {
+                            },
+                            pointerUp: () => {
+                            }
                         };
                         return (
                             <ImageBackground key={index} style={styles.cardBackground} source={cardBackground}>
@@ -63,7 +76,15 @@ export default class scratchListComponent extends Component {
                                         <Expo.GLView
                                             style={{flex: 1}}
                                             onContextCreate={async context => {
-                                                app(context, {image, cover, handlers, status: ()=>{}});
+                                                app(context, {
+                                                    image,
+                                                    cover,
+                                                    handlers,
+                                                    status: (status) => {
+                                                        statuses[index] = status;
+                                                        checkStatus();
+                                                    }
+                                                });
                                             }}
                                         />
                                     </View>

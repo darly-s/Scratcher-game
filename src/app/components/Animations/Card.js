@@ -1,4 +1,5 @@
 import ExpoPixi, { PIXI } from 'expo-pixi';
+import Animations from '../Animations';
 
 const handlers = {
     pointerUp: () => {},
@@ -50,8 +51,7 @@ export default async (context, payload) => {
                 brush.position.copy(event);
                 app.renderer.render(brush, renderTexture, false, null, false);
                 counter ++;
-                if (counter >=20) {
-                    console.log('win');
+                if (counter >=30) {
                     payload.status(true);
                 }
             }
@@ -59,6 +59,7 @@ export default async (context, payload) => {
 
         payload.handlers.pointerDown = (event) => {
             dragging = true;
+            Animations.Red.worry();
             handlers.pointerMove(event);
         };
 

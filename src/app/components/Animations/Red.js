@@ -145,7 +145,7 @@ export default async context => {
         red.state.setAnimation(0, Animations.idle.end, false);
         red.state.setAnimation(0, Animations.worry.start, false);
         red.state.addAnimation(0, Animations.worry.loop, true, 0);
-        red.state.addAnimation(0, Animations.worry.end, false, 3);
+        red.state.addAnimation(0, Animations.worry.end, false, 1);
         red.state.addAnimation(0, Animations.idle.loop, true, 0);
     };
     app.stage.addChild(red);
