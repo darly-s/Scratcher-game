@@ -3,23 +3,24 @@ import { View, ImageBackground, StyleSheet, TouchableWithoutFeedback } from 'rea
 
 import Animations from './Animations/index';
 import ScratchComponent from './ScratchComponent';
+import SuccessComponent from './SuccessComponent'
 
 import winnerImage from '../../../assets/images/magic_forest_winner_frame.png';
 
 app = Animations.Red.default;
+let isWin = false;
 
 const characterComponent = () => (
     <View style={styles.characterContainer}>
-        <TouchableWithoutFeedback onPress={() => Animations.Red.emit()}>
-            <View style={styles.character}>
-                <Expo.GLView
-                    style={{flex: 1}}
-                    onContextCreate={async context => {
-                        const events = (await app(context)) || {};
-                    }}
-                />
-            </View>
-        </TouchableWithoutFeedback>
+        {(isWin) ? <SuccessComponent/> : null}
+        <View style={styles.character}>
+            <Expo.GLView
+                style={{flex: 1}}
+                onContextCreate={async context => {
+                    app(context);
+                }}
+            />
+        </View>
         <ImageBackground style={styles.winnerContainer}
                          imageStyle={styles.winnerImage}
                          source={winnerImage}>

@@ -1,43 +1,54 @@
 import ExpoPixi from 'expo-pixi';
 
-const Animations = {
-    disappointed: () => {},
-    happyBonus: () => {},
-    happyCard: () => {},
-    idle: () => {},
-    loading: () => {},
-    worry: () => {}
-};
+export function disappointed() {
+}
 
-const disappointed = {
-    start: 'red_disappointed_st',
-    loop: 'red_disappointed_loop',
-    end: 'red_disappointed_end'
-};
-const happyBonus = {
-    start: 'red_happy_bonus_st',
-    loop: 'red_happy_bonus_loop',
-    end: 'red_happy_bonus_end'
-};
-const happyCard = {
-    start: 'red_happy_card_st',
-    loop: 'red_happy_card_loop',
-    end: 'red_happy_card_end'
-};
-const idle = {
-    start: 'red_idle_st',
-    loop: 'red_idle_loop',
-    end: 'red_idle_end'
-};
-const loading = {
-    start: 'red_loading_screen_animation_st',
-    loop: 'red_loading_screen_animation_loop',
-    end: 'red_loading_screen_animation_end'
-};
-const worry = {
-    start: 'red_worry_st',
-    loop: 'red_worry_loop',
-    end: 'red_worry_end'
+export function happyBonus() {
+}
+
+export function happyCard() {
+}
+
+export function idle() {
+}
+
+export function loading() {
+}
+
+export function worry() {
+}
+
+const Animations = {
+    disappointed: {
+        start: 'red_disappointed_st',
+        loop: 'red_disappointed_loop',
+        end: 'red_disappointed_end'
+    },
+    happyBonus: {
+        start: 'red_happy_bonus_st',
+        loop: 'red_happy_bonus_loop',
+        end: 'red_happy_bonus_end'
+    },
+    happyCard: {
+        start: 'red_happy_card_st',
+        loop: 'red_happy_card_loop',
+        end: 'red_happy_card_end'
+    },
+    idle: {
+        start: 'red_idle_st',
+        loop: 'red_idle_loop',
+        end: 'red_idle_end'
+    },
+    loading: {
+        start: 'red_loading_screen_animation_st',
+        loop: 'red_loading_screen_animation_loop',
+        end: 'red_loading_screen_animation_end'
+    },
+    worry: {
+        start: 'red_worry_st',
+        loop: 'red_worry_loop',
+        end: 'red_worry_end'
+    }
 };
 
 export default async context => {
@@ -62,85 +73,80 @@ export default async context => {
 
     red.scale.set((app.renderer.height / red.height) / 2);
 
-    red.stateData.setMix(idle.start, idle.loop, 0.2);
-    red.stateData.setMix(idle.loop, idle.end, 0.4);
-    red.stateData.setMix(idle.end, idle.start, 0.4);
-    red.stateData.setMix(idle.end, happyBonus.start, 0.2);
-    red.stateData.setMix(happyBonus.start, happyBonus.loop, 0.4);
-    red.stateData.setMix(happyBonus.loop, happyBonus.end, 0.4);
-    red.stateData.setMix(happyBonus.end, idle.start, 0.4);
+    red.stateData.setMix(Animations.idle.start, Animations.idle.loop, 0.2);
+    red.stateData.setMix(Animations.idle.loop, Animations.idle.end, 0.4);
+    red.stateData.setMix(Animations.idle.end, Animations.idle.start, 0.4);
+    red.stateData.setMix(Animations.idle.end, Animations.happyBonus.start, 0.2);
+    red.stateData.setMix(Animations.happyBonus.start, Animations.happyBonus.loop, 0.4);
+    red.stateData.setMix(Animations.happyBonus.loop, Animations.happyBonus.end, 0.4);
+    red.stateData.setMix(Animations.happyBonus.end, Animations.idle.start, 0.4);
 
-    red.state.setAnimation(0, idle.start, false);
-    red.state.addAnimation(0, idle.loop, true, 0);
+    red.state.setAnimation(0, Animations.idle.start, false);
+    red.state.addAnimation(0, Animations.idle.loop, true, 0);
 
-    Animations.disappointed = () => {
-        red.stateData.setMix(idle.end, disappointed.start, 0.2);
-        red.stateData.setMix(disappointed.start, disappointed.loop, 0.4);
-        red.stateData.setMix(disappointed.loop, happyBonus.end, 0.4);
-        red.stateData.setMix(disappointed.end, idle.loop, 0.4);
+    disappointed = () => {
+        red.stateData.setMix(Animations.idle.end, Animations.disappointed.start, 0.2);
+        red.stateData.setMix(Animations.disappointed.start, Animations.disappointed.loop, 0.4);
+        red.stateData.setMix(Animations.disappointed.loop, Animations.happyBonus.end, 0.4);
+        red.stateData.setMix(Animations.disappointed.end, Animations.idle.loop, 0.4);
 
-        red.state.setAnimation(0, idle.end, false);
-        red.state.setAnimation(0, disappointed.start, false);
-        red.state.addAnimation(0, disappointed.loop, true, 0);
-        red.state.addAnimation(0, disappointed.end, false, 3);
-        red.state.addAnimation(0, idle.loop, true, 0);
+        red.state.setAnimation(0, Animations.idle.end, false);
+        red.state.setAnimation(0, Animations.disappointed.start, false);
+        red.state.addAnimation(0, Animations.disappointed.loop, true, 0);
+        red.state.addAnimation(0, Animations.disappointed.end, false, 3);
+        red.state.addAnimation(0, Animations.idle.loop, true, 0);
     };
 
-    Animations.happyBonus = () => {
-        red.stateData.setMix(idle.end, happyBonus.start, 0.2);
-        red.stateData.setMix(happyBonus.start, happyBonus.loop, 0.4);
-        red.stateData.setMix(happyBonus.loop, happyBonus.end, 0.4);
-        red.stateData.setMix(happyBonus.end, idle.loop, 0.4);
+    happyBonus = () => {
+        red.stateData.setMix(Animations.idle.end, Animations.happyBonus.start, 0.2);
+        red.stateData.setMix(Animations.happyBonus.start, Animations.happyBonus.loop, 0.4);
+        red.stateData.setMix(Animations.happyBonus.loop, Animations.happyBonus.end, 0.4);
+        red.stateData.setMix(Animations.happyBonus.end, Animations.idle.loop, 0.4);
 
-        red.state.setAnimation(0, idle.end, false);
-        red.state.setAnimation(0, happyBonus.start, false);
-        red.state.addAnimation(0, happyBonus.loop, true, 0);
-        red.state.addAnimation(0, happyBonus.end, false, 3);
-        red.state.addAnimation(0, idle.loop, true, 0);
+        red.state.setAnimation(0, Animations.idle.end, false);
+        red.state.setAnimation(0, Animations.happyBonus.start, false);
+        red.state.addAnimation(0, Animations.happyBonus.loop, true, 0);
+        red.state.addAnimation(0, Animations.happyBonus.end, false, 3);
+        red.state.addAnimation(0, Animations.idle.loop, true, 0);
     };
 
-    Animations.happyCard = () => {
-        red.stateData.setMix(idle.end, happyCard.start, 0.2);
-        red.stateData.setMix(happyCard.start, happyCard.loop, 0.4);
-        red.stateData.setMix(happyCard.loop, happyCard.end, 0.4);
-        red.stateData.setMix(happyCard.end, idle.loop, 0.4);
+    happyCard = () => {
+        red.stateData.setMix(Animations.idle.end, Animations.happyCard.start, 0.2);
+        red.stateData.setMix(Animations.happyCard.start, Animations.happyCard.loop, 0.4);
+        red.stateData.setMix(Animations.happyCard.loop, Animations.happyCard.end, 0.4);
+        red.stateData.setMix(Animations.happyCard.end, Animations.idle.loop, 0.4);
 
-        red.state.setAnimation(0, idle.end, false);
-        red.state.setAnimation(0, happyCard.start, false);
-        red.state.addAnimation(0, happyCard.loop, true, 0);
-        red.state.addAnimation(0, happyCard.end, false, 3);
-        red.state.addAnimation(0, idle.loop, true, 0);
+        red.state.setAnimation(0, Animations.idle.end, false);
+        red.state.setAnimation(0, Animations.happyCard.start, false);
+        red.state.addAnimation(0, Animations.happyCard.loop, true, 0);
+        red.state.addAnimation(0, Animations.happyCard.end, false, 3);
+        red.state.addAnimation(0, Animations.idle.loop, true, 0);
     };
 
-    Animations.loading = () => {
-        red.stateData.setMix(idle.end, loading.start, 0.2);
-        red.stateData.setMix(loading.start, loading.loop, 0.4);
-        red.stateData.setMix(loading.loop, loading.end, 0.4);
-        red.stateData.setMix(loading.end, idle.loop, 0.4);
+    loading = () => {
+        red.stateData.setMix(Animations.idle.end, Animations.loading.start, 0.2);
+        red.stateData.setMix(Animations.loading.start, Animations.loading.loop, 0.4);
+        red.stateData.setMix(Animations.loading.loop, Animations.loading.end, 0.4);
+        red.stateData.setMix(Animations.loading.end, Animations.idle.loop, 0.4);
 
-        red.state.setAnimation(0, idle.end, false);
-        red.state.setAnimation(0, loading.start, false);
-        red.state.addAnimation(0, loading.loop, true, 0);
-        red.state.addAnimation(0, loading.end, false, 3);
-        red.state.addAnimation(0, idle.loop, true, 0);
+        red.state.setAnimation(0, Animations.idle.end, false);
+        red.state.setAnimation(0, Animations.loading.start, false);
+        red.state.addAnimation(0, Animations.loading.loop, true, 0);
+        red.state.addAnimation(0, Animations.loading.end, false, 3);
+        red.state.addAnimation(0, Animations.idle.loop, true, 0);
     };
 
-    Animations.worry = () => {
-        red.stateData.setMix(idle.end, worry.start, 0.2);
-        red.stateData.setMix(worry.start, worry.loop, 0.4);
-        red.stateData.setMix(worry.loop, worry.end, 0.4);
-        red.stateData.setMix(worry.end, idle.loop, 0.4);
+    worry = () => {
+        red.stateData.setMix(Animations.idle.end, Animations.worry.start, 0.2);
+        red.stateData.setMix(Animations.worry.start, Animations.worry.loop, 0.4);
+        red.stateData.setMix(Animations.worry.loop, Animations.worry.end, 0.4);
+        red.stateData.setMix(Animations.worry.end, Animations.idle.loop, 0.4);
 
-        red.state.setAnimation(0, idle.end, false);
-        red.state.setAnimation(0, worry.start, false);
-        red.state.addAnimation(0, worry.loop, true, 0);
-        red.state.addAnimation(0, worry.end, false, 3);
-        red.state.addAnimation(0, idle.loop, true, 0);
+        red.state.setAnimation(0, Animations.idle.end, false);
+        red.state.setAnimation(0, Animations.worry.start, false);
+        red.state.addAnimation(0, Animations.worry.loop, true, 0);
+        red.state.addAnimation(0, Animations.worry.end, false, 3);
+        red.state.addAnimation(0, Animations.idle.loop, true, 0);
     };
     app.stage.addChild(red);
 };
-
-
-export function emit() {
-    Animations.happyCard();
-}

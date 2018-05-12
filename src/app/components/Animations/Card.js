@@ -5,9 +5,9 @@ const handlers = {
     pointerMove: () => {},
     pointerDown: () => {}
 };
+let counter = 0;
 
-
-export default async (context) => {
+export default async (context, payload) => {
     const app = ExpoPixi.application({
         context,
         transparent: true,
@@ -21,8 +21,8 @@ export default async (context) => {
     brush.drawCircle(0, 0, 50);
     brush.endFill();
 
-    const texture1 = await ExpoPixi.textureAsync(require('../../../../assets/images/magic_forest_scratch_frame_big.png'));
-    const texture2 = await ExpoPixi.textureAsync(require('../../../../assets/images/scratch-image/magic_forest_bonfire.png'));
+    const texture1 = await ExpoPixi.textureAsync(payload.cover);
+    const texture2 = await ExpoPixi.textureAsync(payload.image);
     PIXI.loader.load(setup);
 
     function setup() {
@@ -37,7 +37,7 @@ export default async (context) => {
         imageToReveal.width = app.screen.width;
         imageToReveal.height = app.screen.height;
 
-        const renderTexture = PIXI.RenderTexture.create(app.screen.width, app.screen.height);
+        const renderTexture = PIXI.RenderTexture.create(app.screen.width, app.screen.height, { transparent: true });
 
         const renderTextureSprite = new PIXI.Sprite(renderTexture);
         stage.addChild(renderTextureSprite);
@@ -45,37 +45,26 @@ export default async (context) => {
 
         let dragging = false;
 
-        handlers.pointerMove = (event) => {
+        payload.handlers.pointerMove = (event) => {
             if (dragging) {
                 brush.position.copy(event);
                 app.renderer.render(brush, renderTexture, false, null, false);
+                counter ++;
+                if (counter >=20) {
+                    console.log('win');
+                    payload.status(true);
+                }
             }
         };
 
-        handlers.pointerDown = (event) => {
+        payload.handlers.pointerDown = (event) => {
             dragging = true;
             handlers.pointerMove(event);
         };
 
-        handlers.pointerUp = (event) => {
+        payload.handlers.pointerUp = (event) => {
             dragging = false;
         };
     }
 
 };
-
-
-export function emit(type, event) {
-
-    if (type === 'touchstart') {
-        handlers.pointerDown({x: event.locationX, y: event.locationY});
-    }
-    if (type === 'touchmove') {
-        handlers.pointerMove({x: event.locationX, y: event.locationY});
-    }
-
-    if (type === 'pointerup') {
-        handlers.pointerUp({x: event.locationX, y: event.locationY});
-    }
-};
-

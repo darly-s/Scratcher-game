@@ -1,56 +1,31 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ImageBackground, Text } from 'react-native';
 
+import { chooseCard, chooseWinner } from './Services/Cards.service.js';
+
 import backgroundText from '../../../assets/images/magic_forest_frame_for_text.png';
 import cardBackground from '../../../assets/images/magic_forest_frame.png';
+import cover from '../../../assets/images/magic_forest_scratch_frame.png';
 
-import bonfireImage from '../../../assets/images/scratch-image/magic_forest_bonfire.png';
-import bowImage from '../../../assets/images/scratch-image/magic_forest_bow.png';
-import leafImage from '../../../assets/images/scratch-image/magic_forest_leaf.png';
-import ropeImage from '../../../assets/images/scratch-image/magic_forest_rope.png';
-import tentImage from '../../../assets/images/scratch-image/magic_forest_tent.png';
+import Animations from './Animations';
+import ScratchView from './Views/ScratchView';
 
-const cards = [1, 2, 3, 4, 5, 6];
-const chooseCard = (params) => {
-    switch (params) {
-        case 0:
-            return bonfireImage;
-        case 1:
-            return bowImage;
-        case 2:
-            return leafImage;
-        case 3:
-            return ropeImage;
-        case 4:
-            return tentImage;
-    }
-};
-const chooseWinner = (rate) => {
-    if (rate <= (10 / 30)) {
-        return bonfireImage;
-    } else if (rate <= ((8 + 10) / 30)) {
-        return bowImage;
-    } else if (rate <= ((6 + 8 + 10) / 30)) {
-        return leafImage;
-    } else if (rate <= ((4 + 6 + 8 + 10) / 30)) {
-        return ropeImage;
-    } else {
-        return tentImage;
-    }
-};
+const app = Animations.Card.default;
+const statuses = [];
+
 const cardsCombine = () => {
     const isWin = Math.random() >= 0.7;
     const images = [];
-    const unTakeble = [];
-    const shuffle = (maxImages) => {
+    const unTaken = [];
+    const shuffle = (status) => {
         while (images.length < 6) {
             let isSufficient;
-            let isUnTakeble;
+            let isUnTaken;
             image = chooseCard(Math.round(Math.random() * 4));
-            isUnTakeble = !!unTakeble.find(el => image === el);
-            if (!isUnTakeble) {
+            isUnTaken = !!unTaken.find(el => image === el);
+            if (!isUnTaken) {
                 isSufficient = images.filter(el => image === el).length >= 2;
-                ((!isSufficient) ? images : unTakeble).push(image);
+                ((!isSufficient) ? images : unTaken).push(image);
             }
         }
         images.sort((a, b) => Math.random() - 0.5);
@@ -63,14 +38,11 @@ const cardsCombine = () => {
         [1,1,1].map(() => images.push(winnerCard));
         shuffle();
     }
+    images.map(item => statuses.push(false));
+    return images;
 };
 
-
 export default class scratchListComponent extends Component {
-    componentDidMount() {
-        cardsCombine();
-    }
-
     render() {
         return (
             <View style={styles.containerScratch}>
@@ -78,8 +50,26 @@ export default class scratchListComponent extends Component {
                     <Text style={styles.text}>MATCH THE WINNER AND WIN A PRIZE</Text>
                 </ImageBackground>
                 {
-                    cards.map(item => <ImageBackground key={item} style={styles.cardBackground}
-                                                       source={cardBackground}></ImageBackground>)
+                    cardsCombine().map((image, index) => {
+                        const handlers = {
+                            pointerMove: () => {},
+                            pointerDown: () => {},
+                            pointerUp: () => {}
+                        };
+                        return (
+                            <ImageBackground key={index} style={styles.cardBackground} source={cardBackground}>
+                                <ScratchView handlers={handlers} style={{flex: 1}}>
+                                    <View style={{flex: 1}}>
+                                        <Expo.GLView
+                                            style={{flex: 1}}
+                                            onContextCreate={async context => {
+                                                app(context, {image, cover, handlers, status: ()=>{}});
+                                            }}
+                                        />
+                                    </View>
+                                </ScratchView>
+                            </ImageBackground>)
+                    })
                 }
             </View>
         )

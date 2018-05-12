@@ -23,7 +23,7 @@ export default class App extends Component {
         return (
             <View style={styles.container}>
                 <ImageBackground style={styles.imageBackground} source={backgroundImage}>
-                    <CharacterComponent/>
+                    {(this.state.isFontLoaded) ? <CharacterComponent/> : null}
                     {(this.state.isFontLoaded) ? <ScratchListComponent isFontLoaded={this.state.fontLoaded}/> : null}
                 </ImageBackground>
             </View>

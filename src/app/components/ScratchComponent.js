@@ -1,19 +1,39 @@
 import React from 'react';
+import {
+    View,
+    Dimensions,
+    StyleSheet,
+    PixelRatio,
+    TouchableWithoutFeedback
+} from 'react-native';
 import Expo from 'expo';
-import { View, Dimensions, StyleSheet, PixelRatio, TouchableWithoutFeedback } from 'react-native';
+
 import Animations from './Animations';
 import ScratchView from './Views/ScratchView';
+import { chooseCard } from './Services/Cards.service';
 
+import cover from '../../../assets/images/magic_forest_scratch_frame_big.png';
+
+const checkBonus = (status) => (status) ? Animations.Red.happyBonus() : null;
 const app = Animations.Card.default;
+const image = chooseCard(Math.round(Math.random() * 4));
+const handlers = {
+    pointerMove: () => {
+    },
+    pointerDown: () => {
+    },
+    pointerUp: () => {
+    }
+};
 
 const scratchComponent = () => (
     <View style={styles.containerScratch}>
-        <ScratchView style={{ flex: 1 }}>
-            <View style={{ flex: 1 }}>
+        <ScratchView handlers={handlers} style={{flex: 1}}>
+            <View style={{flex: 1}}>
                 <Expo.GLView
-                    style={{ flex: 1 }}
+                    style={{flex: 1}}
                     onContextCreate={async context => {
-                        const events = (await app(context)) || {};
+                        app(context, {image, cover, handlers, status: checkBonus});
                     }}
                 />
             </View>
