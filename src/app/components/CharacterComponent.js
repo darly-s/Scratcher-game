@@ -8,7 +8,15 @@ import SuccessComponent from './SuccessComponent'
 import winnerFrame from '../../../assets/images/magic_forest_winner_frame.png';
 import winnerImage from '../../../assets/images/magic_forest_winner.png';
 
+/**
+ * @param {object} app - WebGL context for characterComponent
+ */
+
 app = Animations.Red.default;
+
+/**
+ * @class characterComponent - Represents the animation at the top left of the application.
+ */
 
 const characterComponent = () => (
     <View style={styles.characterContainer}>

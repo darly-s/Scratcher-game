@@ -4,6 +4,13 @@ import leafImage from '../../../../assets/images/scratch-image/magic_forest_leaf
 import ropeImage from '../../../../assets/images/scratch-image/magic_forest_rope.png';
 import tentImage from '../../../../assets/images/scratch-image/magic_forest_tent.png';
 
+/**
+ * Change card image based on random number
+ *
+ * @param {number} params - Random number from 0 to 4
+ * @returns {blob}        - Image instance
+ */
+
 export function chooseCard(params) {
     switch (params) {
         case 0:
@@ -19,6 +26,12 @@ export function chooseCard(params) {
     }
 }
 
+/**
+ * In the case of winning selected an image, which will be present 3 times
+ *
+ * @param {number} rate   - Random number from 0 to 1
+ * @returns {blob}        - Image instance
+ */
 export function chooseWinner(rate) {
     if (rate <= (10 / 30)) {
         return bonfireImage;
@@ -33,6 +46,12 @@ export function chooseWinner(rate) {
     }
 }
 
+/**
+ * In the case of winning selected an image, which will be present 3 times
+ *
+ * @param {blob} params   - Winner Image instance
+ * @returns {number}      - Amount of coins
+ */
 export function checkWinnerAmount(params) {
     switch (params) {
         case bonfireImage:

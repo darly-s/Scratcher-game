@@ -17,8 +17,17 @@ import coinImage from '../../../assets/images/magic_forest_coin_icon_small.png';
 import giftImage from '../../../assets/images/magic_forest_gift_icon.png';
 import questionImage from '../../../assets/images/magic_forest_question_icon.png';
 
+/**
+ * Change starterComponent visibility status from outside
+ */
+
 export function changeInfoVisibility() {
 }
+
+/**
+ * @class howToPlayComponent - Represents a message box that becomes visible when the user press 'How to play' text on starterComponent
+ */
+
 
 export default class howToPlayComponent extends Component {
     state = {

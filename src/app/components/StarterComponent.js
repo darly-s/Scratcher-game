@@ -16,8 +16,16 @@ import buttonImage from '../../../assets/images/magic_forest_button.png';
 import coinImage from '../../../assets/images/magic_forest_coin_icon_small.png';
 import questionImage from '../../../assets/images/magic_forest_question_icon.png';
 
+/**
+ * Change starterComponent visibility status from outside
+ */
+
 export function changeStarterVisibility() {
 }
+
+/**
+ * @class starterComponent - Represents a message box that becomes visible when the user start the game
+ */
 
 export default class starterComponent extends Component {
     state = {

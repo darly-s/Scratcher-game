@@ -4,8 +4,24 @@ import { View, ImageBackground, StyleSheet, Text, Image, TouchableWithoutFeedbac
 import winnerImage from '../../../assets/images/magic_forest_coin_icon_small.png';
 import backgroundImage from '../../../assets/images/magic_forest_frame1.png';
 
-export function setState() {
+/**
+ *
+ * Manipulates successComponent state from outside of component
+ *
+ * @param {Object} params                - List of successComponent state properties
+ * @property {boolean}  params.isWin     - Game result status
+ * @property {string}  params.isVisible  - Component visibility status
+ * @property {blob}  params.image        - An image representing what was won (coins or dollars)
+ * @property {number}  params.amount     - Amount of coins or dollars won
+ *
+ */
+
+export function setState(params) {
 }
+
+/**
+ * @class successComponent - Represents a message box that becomes visible when the user receives a bonus, wins or loses
+ */
 
 export default class successComponent extends Component {
     state = {
@@ -69,7 +85,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        fontSize: 26,
+        fontSize: 30,
         color: 'red'
     },
     coinText: {
@@ -79,7 +95,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         justifyContent: 'center',
         alignSelf: 'center',
-        fontSize: 26,
+        fontSize: 30,
         color: 'black'
     }
 });

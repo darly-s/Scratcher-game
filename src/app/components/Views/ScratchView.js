@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { PanResponder, View } from 'react-native';
 import { PropTypes } from 'prop-types';
 
+/**
+ * @class ScratchView - Represents the listener for pan events
+ */
+
 class ScratchView extends Component {
 
     static defaultProps = {
