@@ -14,9 +14,24 @@ import ScratchView from './Views/ScratchView';
 import HowToPlayComponent from '../../../src/app/components/HowToPlayComponent';
 import StarterComponent from '../../../src/app/components/StarterComponent';
 
+/**
+ *
+ * @param {object} app                               - WebGL context for scratch cards
+ * @param {boolean}[] statuses                       - Visible statuses of scratch cards
+ * @param {Object} globalParams                      - Handle global game status
+ * @property {boolean}  globalParams.isWin           - Win or loose game status
+ * @property {blob}  globalParams.winnerCard         - An image representing what was won (coins or dollars)
+ * @property {boolean}  globalParams.isWinnerCompared - Is winnerCard compared with bonus card
+ *
+ */
+
 const app = Animations.Card.default;
 const statuses = [];
 const globalParams = {isWin: null, winnerCard: null, isWinnerCompared: null};
+
+/**
+ * Checked game status and runs the related animation
+ */
 
 const checkStatus = () => {
     const isAllCardsVisible = statuses.filter(el => el).length === 6;
@@ -31,6 +46,14 @@ const checkStatus = () => {
         }
     }
 };
+
+/**
+ *
+ * Combining random images for scratch cards
+ *
+ *  @returns {blob}[] - List with images
+ *
+ */
 
 const cardsCombine = () => {
     const isWin = Math.random() >= 0.7;
@@ -62,6 +85,10 @@ const cardsCombine = () => {
     globalParams.isWin = isWin;
     return images;
 };
+
+/**
+ * @class scratchListComponent - Represents a list of all scratch cards without a bonus card
+ */
 
 export default class scratchListComponent extends Component {
     render() {
@@ -114,13 +141,14 @@ export default class scratchListComponent extends Component {
 const styles = StyleSheet.create({
     containerScratch: {
         flex: 1,
-        borderWidth: 2,
         alignItems: 'flex-end',
         flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginTop: '1%',
         flexWrap: 'wrap'
     },
     backgroundText: {
-        width: '100%',
+        width: '97%',
         marginTop: '5%',
         marginBottom: '4%',
         borderRadius: 15,
@@ -130,9 +158,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     cardBackground: {
-        width: '30%',
-        height: '30%',
-        margin: '1%',
+        width: '29%',
+        height: '29%',
+        margin: '2%',
+        marginBottom: '4%',
         borderRadius: 15,
         overflow: 'hidden',
     },

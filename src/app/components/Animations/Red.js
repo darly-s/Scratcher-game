@@ -51,6 +51,14 @@ const Animations = {
     }
 };
 
+/**
+ *
+ * Append WebGL context for character animation
+ *
+ * @param {object} context - WebGL context for character animation
+ *
+ */
+
 export default async context => {
     const app = ExpoPixi.application({
         context,

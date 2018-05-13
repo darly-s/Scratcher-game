@@ -16,8 +16,16 @@ import buttonImage from '../../../assets/images/magic_forest_button.png';
 import coinImage from '../../../assets/images/magic_forest_coin_icon_small.png';
 import questionImage from '../../../assets/images/magic_forest_question_icon.png';
 
+/**
+ * Change starterComponent visibility status from outside
+ */
+
 export function changeStarterVisibility() {
 }
+
+/**
+ * @class starterComponent - Represents a message box that becomes visible when the user start the game
+ */
 
 export default class starterComponent extends Component {
     state = {
@@ -33,7 +41,8 @@ export default class starterComponent extends Component {
     render() {
         return (
             <View style={(this.state.isVisible) ? styles.componentContainer : styles.hideContainer}>
-                <ImageBackground style={styles.backgroundImage} source={backgroundImage}>
+                <ImageBackground style={(this.state.isVisible) ? styles.backgroundImage : styles.hideContainer}
+                                 source={backgroundImage}>
                     <TouchableWithoutFeedback onPress={() => {
                         changeInfoVisibility();
                         this.setState({isVisible: false})
@@ -42,8 +51,10 @@ export default class starterComponent extends Component {
                             style={styles.icon} source={questionImage}/> How to play</Text></View>
                     </TouchableWithoutFeedback>
                     <TouchableOpacity onPress={() => this.setState({isVisible: false})}>
-                        <ImageBackground style={styles.button} source={buttonImage}>
-                            <Text style={styles.buttonText}>Play for 60 <Image style={styles.icon} source={coinImage}/></Text>
+                        <ImageBackground style={(this.state.isVisible) ? styles.button : styles.hideContainer}
+                                         source={buttonImage}>
+                            <Text style={styles.buttonText}>Play for 60 <Image
+                                style={(this.state.isVisible) ? styles.icon : styles.hideContainer} source={coinImage}/></Text>
                         </ImageBackground>
                     </TouchableOpacity>
                 </ImageBackground>
@@ -59,7 +70,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         position: 'relative',
         bottom: 0,
-        borderWidth: 2,
         justifyContent: 'center'
     },
     componentContainer: {

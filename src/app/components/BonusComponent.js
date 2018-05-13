@@ -17,6 +17,17 @@ import cover from '../../../assets/images/magic_forest_scratch_frame_big.png';
 import coin from '../../../assets/images/magic_forest_coin_icon_small.png';
 import dollar from '../../../assets/images/magic_forest_dollar_icon.png';
 
+/**
+ *
+ * @param {boolean} isAnimationPlayed   - Flag that allows to check whether an animation was played or not
+ * @function checkBonus                 - Checking bonusComponent for content visibility status
+ * @param {number} height               - Screen height
+ * @param {number} ratio                - Scratch card width and height, based on screen height
+ * @param {object} app                  - WebGL context for bonus scratch card
+ * @param {blob} image                  - Random image for bonus scratch card
+ * @param {Object} handlers             - Handle pan events on current scratch card
+ *
+ */
 let isAnimationPlayed = false;
 const checkBonus = (status) => {
     if (status && !isAnimationPlayed) {
@@ -27,6 +38,8 @@ const checkBonus = (status) => {
         isAnimationPlayed = true;
     }
 };
+const {height} = Dimensions.get('window');
+const ratio = height / 6;
 const app = Animations.Card.default;
 const image = chooseCard(Math.round(Math.random() * 4));
 const handlers = {
@@ -38,12 +51,16 @@ const handlers = {
     }
 };
 
+/**
+ * @class bonusComponent - Represents the bonus scratch card component
+ */
+
 const bonusComponent = () => (
     <View style={styles.containerScratch}>
-        <ScratchView handlers={handlers} style={{flex: 1}}>
-            <View style={{flex: 1}}>
+        <ScratchView handlers={handlers} style={styles.flex}>
+            <View style={styles.flex}>
                 <Expo.GLView
-                    style={{flex: 1}}
+                    style={styles.flex}
                     onContextCreate={async context => {
                         app(context, {image, cover, handlers, status: checkBonus});
                     }}
@@ -53,8 +70,6 @@ const bonusComponent = () => (
     </View>
 );
 
-const {height} = Dimensions.get('window');
-const ratio = height / 6;
 
 const styles = StyleSheet.create({
     containerScratch: {
@@ -62,8 +77,10 @@ const styles = StyleSheet.create({
         height: ratio,
         top: '42%',
         right: '3%',
-        alignSelf: 'center',
-        borderWidth: 2
+        alignSelf: 'center'
+    },
+    flex: {
+        flex: 1
     }
 });
 

@@ -1,12 +1,19 @@
 import ExpoPixi, { PIXI } from 'expo-pixi';
 import Animations from '../Animations';
 
-const handlers = {
-    pointerUp: () => {},
-    pointerMove: () => {},
-    pointerDown: () => {}
-};
 let counter = 0;
+
+/**
+ *
+ * Append WebGL context for scratch cards
+ *
+ * @param {object} context              - WebGL context for scratch cards
+ * @param {object} payload              - application props
+ * @property {blob} payload.cover       - Cover image for card or bonus card
+ * @property {blob} payload.image       - Card main image
+ * @property {object} payload.handlers  - Functions which triggered on pan events
+ *
+ */
 
 export default async (context, payload) => {
     const app = ExpoPixi.application({
@@ -38,7 +45,7 @@ export default async (context, payload) => {
         imageToReveal.width = app.screen.width;
         imageToReveal.height = app.screen.height;
 
-        const renderTexture = PIXI.RenderTexture.create(app.screen.width, app.screen.height, { transparent: true });
+        const renderTexture = PIXI.RenderTexture.create(app.screen.width, app.screen.height, {transparent: true});
 
         const renderTextureSprite = new PIXI.Sprite(renderTexture);
         stage.addChild(renderTextureSprite);
@@ -50,8 +57,8 @@ export default async (context, payload) => {
             if (dragging) {
                 brush.position.copy(event);
                 app.renderer.render(brush, renderTexture, false, null, false);
-                counter ++;
-                if (counter >=30) {
+                counter++;
+                if (counter >= 30) {
                     payload.status(true);
                 }
             }
