@@ -114,13 +114,14 @@ export default class scratchListComponent extends Component {
 const styles = StyleSheet.create({
     containerScratch: {
         flex: 1,
-        borderWidth: 2,
         alignItems: 'flex-end',
         flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        marginTop: '1%',
         flexWrap: 'wrap'
     },
     backgroundText: {
-        width: '100%',
+        width: '97%',
         marginTop: '5%',
         marginBottom: '4%',
         borderRadius: 15,
@@ -130,9 +131,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     cardBackground: {
-        width: '30%',
-        height: '30%',
-        margin: '1%',
+        width: '29%',
+        height: '29%',
+        margin: '2%',
+        marginBottom: '4%',
         borderRadius: 15,
         overflow: 'hidden',
     },

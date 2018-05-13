@@ -62,8 +62,7 @@ const styles = StyleSheet.create({
         height: ratio,
         top: '42%',
         right: '3%',
-        alignSelf: 'center',
-        borderWidth: 2
+        alignSelf: 'center'
     }
 });
 

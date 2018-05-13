@@ -28,7 +28,7 @@ export default class successComponent extends Component {
                     <ImageBackground style={styles.backgroundImage} source={backgroundImage}>
                         <Text style={styles.mainText}>{(this.state.isWin) ? 'YOU WIN' : 'YOU LOOSE'}</Text>
                         {(this.state.isWin) ?
-                            <Text style={styles.coinText}>{this.state.amount} <Image style={{height: 26, width: 26}}
+                            <Text style={styles.coinText}>{this.state.amount} <Image style={{height: 30, width: 26}}
                                                                                      source={this.state.image}/></Text> : null}
                     </ImageBackground>
                 </View>
@@ -47,12 +47,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     componentContainer: {
-        width: '100%',
-        height: '35%',
+        width: '94%',
+        height: '33%',
+        marginLeft: '3%',
+        display: 'flex',
         position: 'absolute',
         justifyContent: 'center',
         alignContent: 'center',
-        borderWidth: 2,
+        alignSelf: 'center',
         top: '20%',
         zIndex: 2
     },

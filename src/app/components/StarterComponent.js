@@ -33,7 +33,8 @@ export default class starterComponent extends Component {
     render() {
         return (
             <View style={(this.state.isVisible) ? styles.componentContainer : styles.hideContainer}>
-                <ImageBackground style={styles.backgroundImage} source={backgroundImage}>
+                <ImageBackground style={(this.state.isVisible) ? styles.backgroundImage : styles.hideContainer}
+                                 source={backgroundImage}>
                     <TouchableWithoutFeedback onPress={() => {
                         changeInfoVisibility();
                         this.setState({isVisible: false})
@@ -42,8 +43,10 @@ export default class starterComponent extends Component {
                             style={styles.icon} source={questionImage}/> How to play</Text></View>
                     </TouchableWithoutFeedback>
                     <TouchableOpacity onPress={() => this.setState({isVisible: false})}>
-                        <ImageBackground style={styles.button} source={buttonImage}>
-                            <Text style={styles.buttonText}>Play for 60 <Image style={styles.icon} source={coinImage}/></Text>
+                        <ImageBackground style={(this.state.isVisible) ? styles.button : styles.hideContainer}
+                                         source={buttonImage}>
+                            <Text style={styles.buttonText}>Play for 60 <Image
+                                style={(this.state.isVisible) ? styles.icon : styles.hideContainer} source={coinImage}/></Text>
                         </ImageBackground>
                     </TouchableOpacity>
                 </ImageBackground>
@@ -59,7 +62,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         position: 'relative',
         bottom: 0,
-        borderWidth: 2,
         justifyContent: 'center'
     },
     componentContainer: {
