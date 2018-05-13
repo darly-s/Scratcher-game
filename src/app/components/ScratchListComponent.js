@@ -9,6 +9,9 @@ import cover from '../../../assets/images/magic_forest_scratch_frame.png';
 
 import Animations from './Animations';
 import ScratchView from './Views/ScratchView';
+import HowToPlayComponent from '../../../src/app/components/HowToPlayComponent';
+import StarterComponent from '../../../src/app/components/StarterComponent';
+import { Font } from "expo";
 
 const app = Animations.Card.default;
 const statuses = [];
@@ -89,9 +92,12 @@ export default class scratchListComponent extends Component {
                                         />
                                     </View>
                                 </ScratchView>
-                            </ImageBackground>)
+                            </ImageBackground>
+                        )
                     })
                 }
+                <StarterComponent/>
+                <HowToPlayComponent/>
             </View>
         )
     };
@@ -101,7 +107,7 @@ const styles = StyleSheet.create({
     containerScratch: {
         flex: 1,
         borderWidth: 2,
-        alignItems: 'center',
+        alignItems: 'flex-end',
         flexDirection: 'row',
         flexWrap: 'wrap'
     },
