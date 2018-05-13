@@ -11,13 +11,19 @@ import Expo from 'expo';
 import Animations from './Animations';
 import ScratchView from './Views/ScratchView';
 import { chooseCard } from './Services/Cards.service';
+import { setState } from './SuccessComponent';
 
 import cover from '../../../assets/images/magic_forest_scratch_frame_big.png';
+import coin from '../../../assets/images/magic_forest_coin_icon_small.png';
+import dollar from '../../../assets/images/magic_forest_dollar_icon.png';
 
 let isAnimationPlayed = false;
 const checkBonus = (status) => {
     if (status && !isAnimationPlayed) {
+        const amount = (Math.random() >= 0.8) ? 25 : 1;
+        const image = (amount === 25) ? coin : dollar;
         Animations.Red.happyBonus();
+        setState({isWin: true, isVisible: true, amount, image});
         isAnimationPlayed = true;
     }
 };

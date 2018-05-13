@@ -32,3 +32,18 @@ export function chooseWinner(rate) {
         return tentImage;
     }
 }
+
+export function checkWinnerAmount(params) {
+    switch (params) {
+        case bonfireImage:
+            return 25;
+        case bowImage:
+            return 30;
+        case leafImage:
+            return 35;
+        case ropeImage:
+            return 50;
+        case tentImage:
+            return 100;
+    }
+}

@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ImageBackground, Text } from 'react-native';
 
-import { chooseCard, chooseWinner } from './Services/Cards.service.js';
+import { chooseCard, chooseWinner, checkWinnerAmount } from './Services/Cards.service.js';
+import { setState } from './SuccessComponent';
 
 import backgroundText from '../../../assets/images/magic_forest_frame_for_text.png';
 import cardBackground from '../../../assets/images/magic_forest_frame.png';
 import cover from '../../../assets/images/magic_forest_scratch_frame.png';
+import coin from '../../../assets/images/magic_forest_coin_icon_small.png';
 
 import Animations from './Animations';
 import ScratchView from './Views/ScratchView';
 import HowToPlayComponent from '../../../src/app/components/HowToPlayComponent';
 import StarterComponent from '../../../src/app/components/StarterComponent';
-import { Font } from "expo";
 
 const app = Animations.Card.default;
 const statuses = [];
@@ -20,7 +21,14 @@ const globalParams = {isWin: null, winnerCard: null, isWinnerCompared: null};
 const checkStatus = () => {
     const isAllCardsVisible = statuses.filter(el => el).length === 6;
     if (isAllCardsVisible) {
-        (globalParams.isWin) ? Animations.Red.happyCard() : Animations.Red.disappointed();
+        if (globalParams.isWin) {
+            const amount = checkWinnerAmount(globalParams.winnerCard);
+            Animations.Red.happyCard();
+            setState({isWin: globalParams.isWin, isVisible: true, amount, image: coin})
+        } else {
+            Animations.Red.disappointed();
+            setState({isWin: globalParams.isWin, isVisible: true})
+        }
     }
 };
 

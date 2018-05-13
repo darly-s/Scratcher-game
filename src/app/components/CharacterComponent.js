@@ -12,7 +12,7 @@ let isWin = false;
 
 const characterComponent = () => (
     <View style={styles.characterContainer}>
-        {(isWin) ? <SuccessComponent/> : null}
+        <SuccessComponent/>
         <View style={styles.character}>
             <Expo.GLView
                 style={{flex: 1}}
