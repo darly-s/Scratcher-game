@@ -1,6 +1,11 @@
 import ExpoPixi, { PIXI } from 'expo-pixi';
 import Animations from '../Animations';
 
+const handlers = {
+    pointerUp: () => {},
+    pointerMove: () => {},
+    pointerDown: () => {}
+};
 let counter = 0;
 
 /**
